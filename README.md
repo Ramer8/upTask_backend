@@ -170,3 +170,5 @@ export const connectDb = async () => {
 
 
 ```
+
+Create Models folder

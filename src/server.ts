@@ -1,12 +1,24 @@
 import express from "express"
 import dotenv from "dotenv"
-import { connect } from "mongoose"
 import { connectDB } from "./config/db"
+import projectRoutes from "./routes/projectRoutes"
+// import router from "./routes/projectRoutes"
 
 dotenv.config()
 
 connectDB()
 
 const app = express()
+
+// Routes (healthy?)
+app.get("/api/healthy", (req, res) => {
+  res.status(200).json({ success: true, message: "server is healthy" })
+})
+
+// Routes
+app.use("/api/projects", projectRoutes)
+
+// app.use("/api/auth")
+// app.use("/api/proyectos", router)
 
 export default app

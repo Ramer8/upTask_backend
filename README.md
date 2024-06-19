@@ -172,3 +172,69 @@ export const connectDb = async () => {
 ```
 
 Create Models folder
+Create Project.ts
+
+```
+import mongoose, { Schema, Document } from "mongoose"
+
+export type ProjectType = Document & {
+  projectName: string
+  clientName: string
+  description: string
+}
+
+const ProjectSchema: Schema = new Schema({
+  projectName: {
+    type: String,
+    required: true,
+    trim: true,
+    // unique: true, //better do with code
+  },
+  clientName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+})
+
+const Project = mongoose.model<ProjectType>("Project", ProjectSchema)
+
+export default Project
+
+```
+
+Model View Controller (modelo-vista-controlador)
+Patron de Arquitectura que permite la separación de obligaciones de cada pieza de tu codigo.
+
+Enfatiza la separacion de la logica de programacion con la presentacion.
+
+Ventajas
+Mejor orden y escalabilidad.
+Al implementar una arquitectura probada todos los programadores saben donde encontrar el codigo para realizar una tarea.
+
+Frameworks que usan esta arquitectura: Laravel, Yango, NextJS, SpringBoot
+
+Que es el Modelo? Model?
+Encargado a lo relacionado a los datos, Base de datos y el CRUD. Esta muy relacionado a tu ODM o ORM.
+
+El modelo se encarga de consultar la base de datos pero no se encarga de mostrar esos datos.
+
+Que es la vista? View?
+Se encarga de todo lo que se ve en pantalla (HTML)
+
+Modelo se encarga de consultar la DB pero la vista muestra los resultados
+En este modelo REACT es la vista.
+
+Que es el Controlador? Controller?
+Comunica Modelo y Vista.
+El controlador recibe una respuesta del tipo JSON para que React lo muestre
+
+Router
+Encargado de registrar todas las URL's o Endpoints que soporta nuestra aplicacion.
+
+MVC es la arquitecura de este proyecto.

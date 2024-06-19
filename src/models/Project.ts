@@ -11,7 +11,8 @@ const ProjectSchema: Schema = new Schema({
     type: String,
     required: true,
     trim: true,
-    // unique: true, //better do with code
+    unique: true,
+    //also do with code
   },
   clientName: {
     type: String,

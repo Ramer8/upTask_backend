@@ -10,7 +10,9 @@ connectDB()
 
 const app = express()
 
-// Routes (healthy?)
+app.use(express.json())
+
+// Routes (is healthy?)
 app.get("/api/healthy", (req, res) => {
   res.status(200).json({ success: true, message: "server is healthy" })
 })

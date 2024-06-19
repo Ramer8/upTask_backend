@@ -145,10 +145,7 @@ Install dotenv
 
 Create .env file with database credentials
 
-`
-DATABASE_URL=mongodb+srv://<user>:<password>@cluster0.fmaxf9e.mongodb.net/
-
-`
+`DATABASE_URL=mongodb+srv://<user>:<password>@cluster0.fmaxf9e.mongodb.net/`
 
 Create config folder and db.ts file to connecto to mongoDB data base.
 
@@ -172,6 +169,7 @@ export const connectDb = async () => {
 ```
 
 Create Models folder
+
 Create Project.ts
 
 ```
@@ -208,33 +206,39 @@ export default Project
 
 ```
 
-Model View Controller (modelo-vista-controlador)
+### Model View Controller (modelo-vista-controlador)
+
 Patron de Arquitectura que permite la separación de obligaciones de cada pieza de tu codigo.
 
-Enfatiza la separacion de la logica de programacion con la presentacion.
+Enfatiza la separación de la logica de programacion con la presentacion.
 
-Ventajas
+##### Ventajas
+
 Mejor orden y escalabilidad.
 Al implementar una arquitectura probada todos los programadores saben donde encontrar el codigo para realizar una tarea.
 
-Frameworks que usan esta arquitectura: Laravel, Yango, NextJS, SpringBoot
+Frameworks que usan esta arquitectura: Laravel, Django, NextJS, SpringBoot
 
-Que es el Modelo? Model?
+#### Que es el Modelo? Model?
+
 Encargado a lo relacionado a los datos, Base de datos y el CRUD. Esta muy relacionado a tu ODM o ORM.
 
 El modelo se encarga de consultar la base de datos pero no se encarga de mostrar esos datos.
 
-Que es la vista? View?
+#### Que es la vista? View?
+
 Se encarga de todo lo que se ve en pantalla (HTML)
 
 Modelo se encarga de consultar la DB pero la vista muestra los resultados
 En este modelo REACT es la vista.
 
-Que es el Controlador? Controller?
+#### Que es el Controlador? Controller?
+
 Comunica Modelo y Vista.
 El controlador recibe una respuesta del tipo JSON para que React lo muestre
 
-Router
+#### Router
+
 Encargado de registrar todas las URL's o Endpoints que soporta nuestra aplicacion.
 
-MVC es la arquitecura de este proyecto.
+#### MVC es la arquitecura de este proyecto.

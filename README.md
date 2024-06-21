@@ -319,7 +319,7 @@ Encargado de registrar todas las URL's o Endpoints que soporta nuestra aplicacio
 #### MVC is the architecture of this "REST API" project
 
 Another kind of architectures:
-Hegagonal
+Hexagonal
 Clean Architecture
 
 ---

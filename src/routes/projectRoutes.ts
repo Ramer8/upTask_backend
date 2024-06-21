@@ -23,5 +23,16 @@ router.get(
   handleInputErrors,
   ProjectController.getProjectById
 )
+router.put(
+  "/:id",
+  body("projectName").notEmpty().withMessage("Project name is required"),
+
+  body("clientName").notEmpty().withMessage("Name is required"),
+
+  body("description").notEmpty().withMessage("Description is required"),
+  param("id").isMongoId().withMessage("ID invalid"),
+  handleInputErrors,
+  ProjectController.updateProject
+)
 
 export default router

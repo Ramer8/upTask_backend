@@ -319,3 +319,52 @@ Encargado de registrar todas las URL's o Endpoints que soporta nuestra aplicacio
 #### MVC es la arquitecura de este proyecto.
 
 ---
+
+Install Express Validator
+
+`npm i express-validator`
+
+Add in projectRoutes.ts in each route that I need.
+
+Add imports: `import { body } from "express-validator"`
+
+Add the follows funtions before the route function.
+We can add one validator each field input.
+
+`body("projectName").notEmpty().withMessage("Name is required")`
+`handleInputErrors`
+
+```
+router.post(
+  "/", body("projectName").notEmpty().withMessage("Name is required"),
+  handleInputErrors,
+  ProjectController.createProjects
+)
+
+```
+
+We did in routes file because we want that the controller looks clean, only do an action.
+
+Create middleware folder with valitation.ts file
+Create handleUnputErrors function
+
+```
+import type { Request, Response, NextFunction } from "express"
+import { validationResult } from "express-validator"
+export const handleInputErrors = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  let errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+  next()
+}
+
+
+```
+
+When forget any field will be return the error message created in function.
+We use this funtion when we need (reusable) and is not necessary repeat this block code in each function

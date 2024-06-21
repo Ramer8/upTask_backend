@@ -316,7 +316,11 @@ Encargado de registrar todas las URL's o Endpoints que soporta nuestra aplicacio
 
 ---
 
-#### MVC es la arquitecura de este proyecto.
+#### MVC is the architecture of this "REST API" project
+
+Another kind of architectures:
+Hegagonal
+Clean Architecture
 
 ---
 
@@ -368,3 +372,35 @@ export const handleInputErrors = (
 
 When forget any field will be return the error message created in function.
 We use this funtion when we need (reusable) and is not necessary repeat this block code in each function
+
+Complete getAllProjects function to show all the projects from his endpoint.
+
+Create getProjectById function and his route plus handleInputErrors
+
+Route:
+`router.get(
+  "/:id",
+  param("id").isMongoId().withMessage("ID invalid"),
+  handleInputErrors,
+  ProjectController.getProjectById
+)`
+
+Function:
+
+```
+static getProjectById = async (req: Request, res: Response) => {
+    const { id } = req.params
+
+    try {
+      const project = await Project.findById(id)
+      if (!project) {
+        const error = new Error("Project not found")
+        return res.status(404).json({ error: error.message })
+      }
+      res.json(project)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+```

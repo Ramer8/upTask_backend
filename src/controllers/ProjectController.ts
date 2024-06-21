@@ -3,11 +3,9 @@ import Project from "../models/Project"
 
 export class ProjectController {
   static createProjects = async (req: Request, res: Response) => {
+    const project = new Project(req.body)
     try {
-      const project = new Project(req.body)
-
       await project.save()
-
       //   res.send("Project created succesfully")
       res.status(201).json({
         success: true,
@@ -20,6 +18,10 @@ export class ProjectController {
   }
 
   static getAllProjects = async (req: Request, res: Response) => {
+    try {
+      const projects = await Project.find({})
+      res.json(projects)
+    } catch (error) {}
     res.send("All the projects from ProjectController")
   }
 }

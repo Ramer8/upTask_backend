@@ -404,3 +404,73 @@ static getProjectById = async (req: Request, res: Response) => {
   }
 
 ```
+
+Continue creating function to complete CRUD
+
+Create UpdateProject function and his route
+We use validation in fields to be modified
+
+`
+router.put("/:id",
+body("projectName").notEmpty().withMessage("Project name is required"),
+
+body("clientName").notEmpty().withMessage("Name is required"),
+
+body("description").notEmpty().withMessage("Description is required"),
+param("id").isMongoId().withMessage("ID invalid"),
+handleInputErrors,
+ProjectController.updateProject
+)
+`
+
+```
+
+  static updateProject = async (req: Request, res: Response) => {
+    const { id } = req.params
+
+    try {
+      const project = await Project.findByIdAndUpdate(id, req.body)
+      if (!project) {
+        const error = new Error("Project not found")
+        return res.status(404).json({ error: error.message })
+      }
+      await project.save()
+      res.send("Project updated")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+```
+
+Create deleteProjectById function and his route
+
+`router.delete("/:id",
+  param("id").isMongoId().withMessage("ID invalid"),
+  handleInputErrors,
+  ProjectController.deleteProjectById
+)`
+
+```
+
+  static deleteProjectById = async (req: Request, res: Response) => {
+    const { id } = req.params
+
+    try {
+      const project = await Project.findById(id)
+
+      if (!project) {
+        const error = new Error("Project not found")
+        return res.status(404).json({ error: error.message })
+      }
+      await project.deleteOne()
+      res.send("Project deleted")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+```
+
+Create Task Models into Models Folder
+Create task.ts

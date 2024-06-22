@@ -56,6 +56,7 @@ export class ProjectController {
       console.log(error)
     }
   }
+
   static deleteProjectById = async (req: Request, res: Response) => {
     const { id } = req.params
 

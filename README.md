@@ -328,11 +328,13 @@ Install Express Validator
 
 `npm i express-validator`
 
-Add in projectRoutes.ts in each route that I need.
+#### Add in projectRoutes.ts in each route that I need.
 
 Add imports: `import { body } from "express-validator"`
+Add the follows functions before the route function.
 
-Add the follows funtions before the route function.
+---
+
 We can add one validator each field input.
 
 `body("projectName").notEmpty().withMessage("Name is required")`
@@ -349,7 +351,10 @@ router.post(
 
 We did in routes file because we want that the controller looks clean, only do an action.
 
-Create middleware folder with valitation.ts file
+---
+
+#### Create middleware folder with valitation.ts file
+
 Create handleUnputErrors function
 
 ```
@@ -373,9 +378,9 @@ export const handleInputErrors = (
 When forget any field will be return the error message created in function.
 We use this funtion when we need (reusable) and is not necessary repeat this block code in each function
 
-Complete getAllProjects function to show all the projects from his endpoint.
+#### Complete getAllProjects function to show all the projects from his endpoint.
 
-Create getProjectById function and his route plus handleInputErrors
+##### Create getProjectById function and his route plus handleInputErrors
 
 Route:
 `router.get(
@@ -405,9 +410,12 @@ static getProjectById = async (req: Request, res: Response) => {
 
 ```
 
-Continue creating function to complete CRUD
+---
 
-Create UpdateProject function and his route
+#### Continue creating function to complete CRUD
+
+##### Create UpdateProject function and his route
+
 We use validation in fields to be modified
 
 `
@@ -443,7 +451,7 @@ ProjectController.updateProject
 
 ```
 
-Create deleteProjectById function and his route
+##### Create deleteProjectById function and his route
 
 `router.delete("/:id",
   param("id").isMongoId().withMessage("ID invalid"),
@@ -472,10 +480,13 @@ Create deleteProjectById function and his route
 
 ```
 
-Create Task Models into Models Folder
+#### Create Task Models into Models Folder
+
 Create task.ts
 
-Create TaskController.ts
+#### Create TaskController.ts
+
+##### Create createTask function
 
 ```
 import type { Request, Response } from "express"
@@ -509,3 +520,23 @@ export class TaskController {
 }
 
 ```
+
+---
+
+#### Nested Resource Routing
+
+O "Enrutamiento de Recursos Anidados" es un patron de diseño en la contruccion de URLs para APIs, especialmente APIs RESTful, donde las relaciones jerargicas entre recursos son expresadas en la estructura de la URL. Este patron es muy comun en aplicaciones web y moviles que manejas datos relacionadas en forma de recursos.
+
+##### Ventajas:
+
+<ol>
+<li>Sabemos si el proyecto existe</li>
+ <li>Sabemos si el usuario tiene permisos</li>
+ <li>Crear tareas en ese proyecto</li>
+</ol>
+
+---
+
+Create another middleware
+
+Create project.ts file

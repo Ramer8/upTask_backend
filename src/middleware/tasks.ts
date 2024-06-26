@@ -26,3 +26,19 @@ export async function validateTaskExists(
     res.status(500).json({ error: "We have an Error" })
   }
 }
+export async function taskBelongToProject(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    //check if task belong to this project
+    if (req.task.project.toString() !== req.project.id.toString()) {
+      const error = new Error("Invalid action")
+      return res.status(400).json({ error: error.message })
+    }
+    next()
+  } catch (error) {
+    res.status(500).json({ error: "We have an Error" })
+  }
+}

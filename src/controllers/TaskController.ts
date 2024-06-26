@@ -49,7 +49,8 @@ export class TaskController {
   static updateTask = async (req: Request, res: Response) => {
     try {
       const { taskId } = req.params
-      const task = await Task.findByIdAndUpdate(taskId, req.body)
+      //   const task = await Task.findByIdAndUpdate(taskId, req.body)
+      const task = await Task.findById(taskId)
       if (!task) {
         const error = new Error("Task not found")
         return res.status(404).json({ error: error.message })
@@ -58,6 +59,9 @@ export class TaskController {
         const error = new Error("Invalid action")
         return res.status(400).json({ error: error.message })
       }
+      task.name = req.body.name
+      task.description = req.body.description
+      await task.save()
       res.send("Task updated successfully")
     } catch (error) {
       res.status(500).json({ error: "We have an Error" })
@@ -72,13 +76,11 @@ export class TaskController {
         return res.status(404).json({ error: error.message })
       }
 
-      //check if task belong to this project
-
+      //fitler task to delete from the project task list
       req.project.task = req.project.task.filter(
         (task) => task.toString() !== taskId
       )
       await Promise.allSettled([task.deleteOne(), req.project.save()])
-
       res.send("Task deleted successfully")
     } catch (error) {
       res.status(500).json({ error: "We have an Error" })

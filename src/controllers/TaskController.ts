@@ -33,6 +33,13 @@ export class TaskController {
         const error = new Error("Task not found")
         return res.status(404).json({ error: error.message })
       }
+
+      //check if task belong to this project
+      if (task.project.toString() !== req.project.id) {
+        const error = new Error("Invalid action")
+        return res.status(400).json({ error: error.message })
+      }
+
       res.send(task)
     } catch (error) {
       res.status(500).json({ error: "We have an Error" })

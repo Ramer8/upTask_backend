@@ -45,9 +45,11 @@ router.delete(
 
 //Task Routes
 
+router.param("projectId", validateProjectsExists)
+
 router.post(
   "/:projectId/tasks",
-  validateProjectsExists,
+  // validateProjectsExists,
   body("name").notEmpty().withMessage("Task name is required"),
   body("description").notEmpty().withMessage("Task description is required"),
   handleInputErrors,
@@ -56,12 +58,12 @@ router.post(
 
 router.get(
   "/:projectId/tasks",
-  validateProjectsExists,
+  // validateProjectsExists,
   TaskController.getProjectTask
 )
 router.get(
   "/:projectId/tasks/:taskId",
-  validateProjectsExists,
+  // validateProjectsExists,
   TaskController.getTaskById
 )
 

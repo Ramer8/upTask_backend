@@ -63,6 +63,10 @@ router.get(
 )
 router.get(
   "/:projectId/tasks/:taskId",
+  //validate taskId
+  param("taskId").isMongoId().withMessage("ID invalid"),
+  handleInputErrors,
+
   // validateProjectsExists,
   TaskController.getTaskById
 )

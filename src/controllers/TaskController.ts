@@ -26,20 +26,22 @@ export class TaskController {
   }
   static getTaskById = async (req: Request, res: Response) => {
     try {
-      const { taskId } = req.params
-      const task = await Task.findById(taskId)
+      //   console.log(req.task.id, "el id")
+      //   const { taskId } = req.params
+      //   const task = await Task.findById(taskId)
+
       //   if (!task) {
       //     const error = new Error("Task not found")
       //     return res.status(404).json({ error: error.message })
       //   }
 
       //check if task belong to this project
-      if (task.project.toString() !== req.project.id) {
+      if (req.task.project.toString() !== req.project.id) {
         const error = new Error("Invalid action")
         return res.status(400).json({ error: error.message })
       }
 
-      res.send(task)
+      res.send(req.task)
     } catch (error) {
       res.status(500).json({ error: "We have an Error" })
     }

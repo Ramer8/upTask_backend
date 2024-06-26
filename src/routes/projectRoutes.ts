@@ -46,12 +46,12 @@ router.delete(
 
 //Task Routes
 
+//Validation from middlewares
 router.param("projectId", validateProjectsExists)
 router.param("taskId", validateTaskExists)
 
 router.post(
   "/:projectId/tasks",
-  // validateProjectsExists,
   body("name").notEmpty().withMessage("Task name is required"),
   body("description").notEmpty().withMessage("Task description is required"),
   handleInputErrors,
@@ -62,7 +62,6 @@ router.get("/:projectId/tasks", TaskController.getProjectTask)
 
 router.get(
   "/:projectId/tasks/:taskId",
-  // validateTaskExists,
   param("taskId").isMongoId().withMessage("ID invalid"),
   handleInputErrors,
   TaskController.getTaskById

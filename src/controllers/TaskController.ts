@@ -15,6 +15,7 @@ export class TaskController {
       res.status(500).json({ error: "We have an Error" })
     }
   }
+
   static getProjectTask = async (req: Request, res: Response) => {
     try {
       const projectId = req.project.id
@@ -24,6 +25,7 @@ export class TaskController {
       res.status(500).json({ error: "We have an Error" })
     }
   }
+
   static getTaskById = async (req: Request, res: Response) => {
     try {
       //check if task belong to this project
@@ -39,14 +41,7 @@ export class TaskController {
 
   static updateTask = async (req: Request, res: Response) => {
     try {
-      //   const { taskId } = req.params
-      //   const task = await Task.findById(taskId)
-      //   if (!task) {
-      //     const error = new Error("Task not found")
-      //     return res.status(404).json({ error: error.message })
-      //   }
       if (req.task.project.toString() !== req.project.id) {
-        //   if (task.project.toString() !== req.project.id) {
         const error = new Error("Invalid action")
         return res.status(400).json({ error: error.message })
       }
@@ -58,15 +53,9 @@ export class TaskController {
       res.status(500).json({ error: "We have an Error" })
     }
   }
+
   static deleteTaskById = async (req: Request, res: Response) => {
     try {
-      //   const { taskId } = req.params
-      //   const task = await Task.findById(taskId)
-      //   if (!task) {
-      //     const error = new Error("Task not found")
-      //     return res.status(404).json({ error: error.message })
-      //   }
-
       //fitler task to delete from the project task list
       req.project.task = req.project.task.filter(
         (task) => task.toString() !== req.task.id
@@ -77,15 +66,9 @@ export class TaskController {
       res.status(500).json({ error: "We have an Error" })
     }
   }
+
   static updateTaskStatus = async (req: Request, res: Response) => {
     try {
-      //   const { taskId } = req.params
-      //   const task = await Task.findById(taskId)
-      //   if (!task) {
-      //     const error = new Error("Task not found")
-      //     return res.status(404).json({ error: error.message })
-      //   }
-
       req.task.status = req.body.status
       await req.task.save()
       console.log(req.task)

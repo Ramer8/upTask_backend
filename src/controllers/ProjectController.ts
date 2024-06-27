@@ -23,7 +23,9 @@ export class ProjectController {
     try {
       const projects = await Project.find({})
       res.json(projects)
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
     res.send("All the projects from ProjectController")
   }
 
@@ -54,7 +56,7 @@ export class ProjectController {
       project.description = req.body.description
       project.projectName = req.body.projectName
       await project.save()
-      res.send("Project updated")
+      res.send("Project updated successfully")
     } catch (error) {
       console.log(error)
     }
@@ -62,7 +64,7 @@ export class ProjectController {
 
   static deleteProjectById = async (req: Request, res: Response) => {
     const { id } = req.params
-
+    // delete also this tasks of this projects
     try {
       const project = await Project.findById(id)
 
@@ -71,7 +73,7 @@ export class ProjectController {
         return res.status(404).json({ error: error.message })
       }
       await project.deleteOne()
-      res.send("Project deleted")
+      res.send("Project deleted successfully")
     } catch (error) {
       console.log(error)
     }

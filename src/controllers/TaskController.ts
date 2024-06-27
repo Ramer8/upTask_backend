@@ -62,7 +62,6 @@ export class TaskController {
     try {
       req.task.status = req.body.status
       await req.task.save()
-      console.log(req.task)
       res.send("Task updated successfully")
     } catch (error) {
       res.status(500).json({ error: "We have an Error" })

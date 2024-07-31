@@ -7,6 +7,7 @@ export class ProjectController {
     try {
       await project.save()
       //   res.send("Project created succesfully")
+      console.log(project, " Project created!!!")
       res.status(201).json({
         success: true,
         message: "Project created succesfully",

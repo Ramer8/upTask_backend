@@ -589,3 +589,11 @@ We can put both in this way:
 `await Promise.allSettled([task.save(), req.project.save()])`
 
 The both await executes simultaneously.
+
+Install Cors
+
+`npm i cors`
+
+Install typeScript support
+
+`npm i -D @types/cors`

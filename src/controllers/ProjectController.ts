@@ -6,13 +6,13 @@ export class ProjectController {
     const project = new Project(req.body)
     try {
       await project.save()
-      //   res.send("Project created succesfully")
-      console.log(project, " Project created!!!")
-      res.status(201).json({
-        success: true,
-        message: "Project created succesfully",
-        data: project,
-      })
+      res.send("Project created succesfully")
+      // console.log(project, " Project created!!!")
+      // res.status(201).json({
+      //   success: true,
+      //   message: "Project created succesfully",
+      //   data: project,
+      // })
     } catch (error) {
       if (error.code === 11000) {
         return res.status(404).json({ error: error.message })

@@ -7,27 +7,13 @@ import projectRoutes from "./routes/projectRoutes"
 // import router from "./routes/projectRoutes"
 
 dotenv.config()
-
 connectDB()
 
 const app = express()
-
-//Allow/enable connections
-
-// const corsOptions: CorsOptions = {
-//   origin: function (origin, callback) {
-//     console.log(origin)
-//   },
-// }
-
-// app.use(cors(corsOptions))
-
-///
-
 app.use(cors(corsConfig))
 
+// Basic way to use cors by Ramer
 // app.use(cors())
-// forma basica de invocar cors
 
 app.use(express.json())
 
@@ -35,6 +21,7 @@ app.use(express.json())
 app.get("/api/healthy", (req, res) => {
   res.status(200).json({ success: true, message: "server is healthy" })
 })
+// with cors not working from thunderclient by Ramer
 
 // Routes
 app.use("/api/projects", projectRoutes)
